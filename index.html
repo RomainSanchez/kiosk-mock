@@ -13,6 +13,7 @@
 
 		<script type="text/javascript" src="/js/helper.js"></script>
 		<script type="text/javascript" src="/js/jquery.js"></script>
+		<script type="text/javascript" src="/js/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="/js/jquery.idle.min.js"></script>
 		<script type="text/javascript" src="/js/keypad.js"></script>
 		<script type="text/javascript" src="/js/dialog-polyfill.js"></script>
@@ -27,7 +28,7 @@
 		<div id="app" class="app-layout mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-color--blue-grey-800">
 			<header class="app-header mdl-layout__header mdl-color--blue-grey-800 mdl-shadow--4dp">
 				<div class="mdl-layout__header-row">
-					<span class="mdl-layout-title"><img src="images/logo-evenement-small.png" alt="logo"/></span>
+					<span class="mdl-layout-title"><img id="logo" src="images/logo-evenement-small.png" alt="logo"/></span>
 					<div class="mdl-layout-spacer"></div>
 					<!-- I18N LINKS -->
 					<i class="material-icons culture">language</i>
@@ -163,15 +164,15 @@
 
 		<!-- JS DATA -->
 		<div class="js-data" id="kiosk-urls"
-		  data-get-new-transaction="<?php echo cross_app_url_for('tck', 'transaction/newJson') ?>"
-		  data-get-csrf="<?php echo cross_app_url_for('tck', 'transaction/getCSRFToken') ?>"
-		  data-get-countries="<?php echo cross_app_url_for('kiosk', 'default/getCountries') ?>"
-		  data-complete-transaction="<?php echo cross_app_url_for('tck', 'transaction/complete?id=-666') ?>"
-		  data-get-manifestations="<?php echo cross_app_url_for('tck', 'transaction/getManifestations?simplified=1') ?>"
-		  data-get-store="<?php echo cross_app_url_for('tck', 'transaction/getStore?simplified=1') ?>"
-		  data-get-museum="<?php echo cross_app_url_for('tck', 'transaction/getPeriods?simplified=1') ?>"
-		  data-print-tickets="<?php echo cross_app_url_for('tck', 'ticket/print?id=-666') ?>"
-		  data-log-print-failure="<?php echo cross_app_url_for('tck', 'transaction/directPrintLog?id=-666') ?>"
+		  data-get-new-transaction="http://localhost:9000/transaction/newJson"
+		  data-get-csrf="http://localhost:9000/transaction/getCSRFToken"
+		  data-get-countries="http://localhost:9000/default/getCountries"
+		  data-complete-transaction="http://localhost:9000/transaction/complete/-666"
+		  data-get-manifestations="http://localhost:9000/transaction/getManifestations"
+		  data-get-store="http://localhost:9000/transaction/getStore"
+		  data-get-museum="http://localhost:9000/transaction/getPeriods"
+		  data-print-tickets="http://localhost:9000/ticket/print/-666') ?>"
+		  data-log-print-failure="http://localhost:9000/transaction/directPrintLog/-666') ?>"
 		></div>
 
 		<div class="js-data" id="devices" data-devices="<?php echo htmlspecialchars(json_encode(sfConfig::get('app_io_devices',
@@ -197,17 +198,17 @@
 		))) ?>"></div>
 
 		<div class="js-data" id="config"
-		  data-culture="<?php echo sfContext::getInstance()->getUser()->getCulture(); ?>"
+		  data-culture="fr"
 		  data-idle-time="<?php echo sfConfig::get('app_idle_time', false); ?>"
-		  data-ui-labels="<?php echo htmlspecialchars(json_encode(sfConfig::get('app_ui_labels'))) ?>"
-		  data-show-location-prompt="<?php echo sfConfig::get('app_location_prompt') ?>"
+		  data-ui-labels="name"
+		  data-show-location-prompt="true"
 		  data-payment-method="<?php echo sfConfig::get('app_payment_method_id') ?>"
 		 ></div>
 
 		<!-- JS I18N -->
-		<div class="js-i18n" data-source="manifestations" data-target="<?php echo kioskConfiguration::getText('app_texts_menu_manifestation', 'Manifestations') ?>"></div>
-		<div class="js-i18n" data-source="museum" data-target="<?php echo kioskConfiguration::getText('app_texts_menu_museum', 'Museum') ?>"></div>
-		<div class="js-i18n" data-source="store" data-target="<?php echo kioskConfiguration::getText('app_texts_menu_store', 'Store') ?>"></div>
+		<div class="js-i18n" data-source="manifestations" data-target="Manifestations"></div>
+		<div class="js-i18n" data-source="museum" data-target="Museum"></div>
+		<div class="js-i18n" data-source="store" data-target="Store"></div>
 
 		<!-- HANDLEBARS TEMPLATES -->
 			<!-- menu item -->

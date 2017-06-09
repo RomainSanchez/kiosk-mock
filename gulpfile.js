@@ -13,7 +13,8 @@ gulp.task('connect', function() {
 });
 
 gulp.task('mockserver', function() {
-  http.createServer(mockserver('./mocks')).listen(9001);
+  http.createServer(mockserver('./mocks'))
+      .listen(9000);
 });
 
 // keeps gulp from crashing for scss errors
@@ -33,4 +34,4 @@ gulp.task('watch', function () {
   gulp.watch('./**/*', ['livereload']);
 });
 
-gulp.task('default', ['connect', 'sass', 'watch']);
+gulp.task('default', ['connect', 'mockserver', 'sass', 'watch']);

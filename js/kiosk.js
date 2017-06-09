@@ -21,19 +21,6 @@
 ***********************************************************************************/
 $(document).ready(function() {
 	LI.kiosk.init();
-	//$.when(LI.kiosk.getCountries()).then(function() {LI.kiosk.utils.showLocationPrompt();});
-
-	// $('body')
-	// 	.on('mozfullscreenchange', function() {alert('change');})
-	// 	.on('fullscreenerror', function() {alert('error');})
-	// 	.on('fullScreen', function() {
-	// 		$(this).get(0).mozRequestFullScreen();
-	// 	})
-	// ;
-
-	// if(!window.fullScreen) {
-	// 	$('body').trigger('fullScreen');
-	// }
 });
 
 if ( LI === undefined )
@@ -76,21 +63,21 @@ LI.kiosk = {
 	  		LI.kiosk.menu();
 
 			//handle idle user
-			if(LI.kiosk.config.idleTime) {
-				$(this).idle({
-			  		onIdle: function() {
-			    		$('.culture[data-culture="fr"]')
-			    			.trigger('click')
-			    			// get native element as triggering click
-			    			// doesn't work on jquery objects that  were
-			    			// not previously bound with .click or .on
-			    			.get(0)
-			    			.click()
-			    		;
-			  		},
-			  		idle: LI.kiosk.config.idleTime
-				});
-			}
+			// if(LI.kiosk.config.idleTime) {
+			// 	$(this).idle({
+			//   		onIdle: function() {
+			//     		$('.culture[data-culture="fr"]')
+			//     			.trigger('click')
+			//     			// get native element as triggering click
+			//     			// doesn't work on jquery objects that  were
+			//     			// not previously bound with .click or .on
+			//     			.get(0)
+			//     			.click()
+			//     		;
+			//   		},
+			//   		idle: LI.kiosk.config.idleTime
+			// 	});
+			// }
 
 			//Retrieve country list for location prompt
 			if(LI.kiosk.config.showLocationPrompt) {
@@ -899,26 +886,26 @@ LI.kiosk = {
 			    });
 			}
 		},
-		checkAvailability: function(gaugeUrl, lineId, productId) {
-			var qty = 0;
-			var available = true;
+		// checkAvailability: function(gaugeUrl, lineId, productId) {
+		// 	var qty = 0;
+		// 	var available = true;
 
-			$.each(LI.kiosk.cart.lines, function(key, line) {
-				if(line.product.id == productId)
-					qty += line.qty;
-			});
+		// 	$.each(LI.kiosk.cart.lines, function(key, line) {
+		// 		if(line.product.id == productId)
+		// 			qty += line.qty;
+		// 	});
 
-			$.get(gaugeUrl, function(data) {
+		// 	$.get(gaugeUrl, function(data) {
 
-				if(data.free < qty){
-					available = false;
-					$('#' + lineId + ' .remove-item').click();
-					toastr.info('The last item added to the cart was removed as it wasn\'t available anymore');
-				}
-			});
+		// 		if(data.free < qty){
+		// 			available = false;
+		// 			$('#' + lineId + ' .remove-item').click();
+		// 			toastr.info('The last item added to the cart was removed as it wasn\'t available anymore');
+		// 		}
+		// 	});
 
-			return available;
-		},
+		// 	return available;
+		// },
 		updateTransaction: function(data, successCallback, errorCallback) {
 			return $.ajax({
 			    url: LI.kiosk.urls.completeTransaction.replace('-666', LI.kiosk.transaction.id),
